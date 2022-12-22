@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('order', [App\Http\Controllers\OrderController::class, 'index'])->name('order');
+Route::get('download/{id}', [App\Http\Controllers\OrderController::class, 'download'])->name('download');
+Route::get('create', [App\Http\Controllers\OrderController::class, 'create'])->name('create');
+Route::get('create', [App\Http\Controllers\JenisController::class, 'create'])->name('create');
+Route::post('/store', [App\Http\Controllers\OrderController::class, 'store'])->name('store');
