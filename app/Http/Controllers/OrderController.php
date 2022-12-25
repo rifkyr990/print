@@ -96,7 +96,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('show', compact('order'));
     }
 
     /**
@@ -107,7 +107,11 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $jenis = Jenis::all();
+        $status = Status::all();
+        $customer = Customer::all();
+
+        return view('edit', compact('order','jenis', 'status', 'customer'));
     }
 
     /**
@@ -119,7 +123,10 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $input = $request->all();
+        $order->update($input);
+
+        return redirect()->route('order')->with('success', 'Orderan berhasil diupdate');
     }
 
     /**
@@ -130,6 +137,8 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+
+        return redirect()->route('order')->with('success', 'orderan berhasil dihapus');
     }
 }
